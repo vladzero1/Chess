@@ -1,0 +1,21 @@
+Pieces :
+- pieceType
+- getType
+- player
+- Movement(?)
+- Current Position(?) (1)
+- Piece GUI
+
+Board :
+- board Array
+- Generate Board
+- Generate Start Pieces
+- Moving Piece
+- checkmate checking
+- boardGUI
+
+GameManager:
+- turn loop
+
+Player:
+- all Pieces Amount

@@ -1,20 +1,18 @@
 package mainGame;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
-
-import gui.ChessWindow;
-
 public class GameState {
 
+	public static void main(String[] args)
+	{
+		GameState.StartGame();
+	}
+	
 	public GameState()
 	{
 
 	}
 	
-	private void StartGame()
+	public static void StartGame()
 	{
 		Thread thread = new Thread(new Runnable() {
 			

@@ -11,10 +11,10 @@ public class Player {
 	public int rookAmount = 2;
 	public int pawnAmount = 7;
 	
-	public Player(boolean isPlayer1, String username)
+	public Player(boolean isPlayer1)
 	{
 		this.isPlayer1 = isPlayer1;
-		this.username =  username;
+//		this.username =  username;
 	}
 	
 	public boolean getIsPlayer1()
