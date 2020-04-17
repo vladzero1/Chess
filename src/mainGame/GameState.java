@@ -1,12 +1,30 @@
 package mainGame;
 
-import gui.GameGUI;
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
+import gui.ChessWindow;
 
 public class GameState {
 
 	public GameState()
 	{
-		GameGUI gameGUI = new GameGUI();
-		System.out.println("done");
+
 	}
+	
+	private void StartGame()
+	{
+		Thread thread = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				new Board();
+			}
+		});
+		thread.start();
+	}
+
+
 }
