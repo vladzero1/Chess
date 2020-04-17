@@ -1,7 +1,7 @@
 package mainGame;
 
 public class Player {
-	boolean isPlayer1;
+	PlayerColour colour;
 	
 	public String username;	
 	public int kingAmount = 1;
@@ -11,14 +11,14 @@ public class Player {
 	public int rookAmount = 2;
 	public int pawnAmount = 7;
 	
-	public Player(boolean isPlayer1)
+	public Player(PlayerColour playerColour)
 	{
-		this.isPlayer1 = isPlayer1;
+		colour = playerColour;
 //		this.username =  username;
 	}
 	
-	public boolean getIsPlayer1()
+	public PlayerColour getColour()
 	{
-		return isPlayer1;
+		return colour;
 	}
 }

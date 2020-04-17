@@ -8,18 +8,19 @@ import javax.swing.ImageIcon;
 
 import javafx.util.Pair;
 import mainGame.PiecesType;
+import mainGame.PlayerColour;
 
 public class PieceGUI {
 
-	PiecesType pieceType;
-	boolean isPlayer1;
+	PiecesType type;
+	PlayerColour colour;
 	Pair<Integer, Integer> position;
 	Image img = null;
 	
-	public PieceGUI(PiecesType pieceType, boolean isPlayer1, Pair<Integer, Integer> position)
+	public PieceGUI(PiecesType pieceType, PlayerColour playerColour, Pair<Integer, Integer> position)
 	{
-		this.pieceType = pieceType;
-		this.isPlayer1 = isPlayer1;
+		type = pieceType;
+		colour = playerColour;
 		this.position = position;
 		UpdateButtonImg();
 	}
@@ -29,22 +30,22 @@ public class PieceGUI {
 		if(img == null)
 		{
 			String iconURL = "";
-			if (!isPlayer1) {
+			if (colour == PlayerColour.Black) {
 				iconURL = "Assets/black";
 			} else {
 				iconURL = "Assets/white";
 			}
-			if (pieceType == PiecesType.King) {
+			if (type == PiecesType.King) {
 				iconURL += "King.png";
-			} else if (pieceType == PiecesType.Queen) {
+			} else if (type == PiecesType.Queen) {
 				iconURL += "Queen.png";
-			} else if (pieceType == PiecesType.Bishop) {
+			} else if (type == PiecesType.Bishop) {
 				iconURL += "Bishop.png";
-			} else if (pieceType == PiecesType.Knight) {
+			} else if (type == PiecesType.Knight) {
 				iconURL += "Knight.png";
-			} else if (pieceType == PiecesType.Rook) {
+			} else if (type == PiecesType.Rook) {
 				iconURL += "Rook.png";
-			} else if (pieceType == PiecesType.Pawn) {
+			} else if (type == PiecesType.Pawn) {
 				iconURL += "Pawn.png";
 			}
 			try {

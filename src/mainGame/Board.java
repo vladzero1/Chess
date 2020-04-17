@@ -22,8 +22,8 @@ public class Board {
 	public Board()
 	{
 		GenerateBoard();
-		player1 = new Player(true);
-		player2 = new Player(false);
+		player1 = new Player(PlayerColour.White);
+		player2 = new Player(PlayerColour.Black);
 		GeneratePieces(player1, player2); 
 	}
 	
@@ -33,23 +33,19 @@ public class Board {
 		{
 			for (int col = 0; col < 8; col++) 
 			{
-				if(player1.getIsPlayer1())
-				{
-					Pair<Integer, Integer> position = new Pair<Integer, Integer>(row, col);
-					if (row == 0 && col == 0 || row == 0 && col == 7) 
-						{new Rook(position, player1);}
-					else if (row == 0 && col == 1 || row == 0 && col == 6) 
-						{new Bishop(position, player1);}
-					else if (row == 0 && col == 2 || row == 0 && col == 5)
-						{new Knight(position, player1);}
-					else if (row == 0 && col == 3)
-						{new Queen(position, player1);}
-					else if (row == 0 && col == 4)
-						{new King(position, player1);}
-					else if(row == 1)
-						{new Pawn(position, player1);}
-				}
-				
+				Pair<Integer, Integer> position = new Pair<Integer, Integer>(row, col);
+				if (row == 0 && col == 0 || row == 0 && col == 7) 
+					{new Rook(position, player1);}
+				else if (row == 0 && col == 1 || row == 0 && col == 6) 
+					{new Bishop(position, player1);}
+				else if (row == 0 && col == 2 || row == 0 && col == 5)
+					{new Knight(position, player1);}
+				else if (row == 0 && col == 3)
+					{new Queen(position, player1);}
+				else if (row == 0 && col == 4)
+					{new King(position, player1);}
+				else if(row == 1)
+					{new Pawn(position, player1);}	
 			}
 		}
 		for(int row = 6; row < 8;row++)

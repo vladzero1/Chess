@@ -17,7 +17,7 @@ public abstract class Piece {
 		this.position = position;
 		this.player = player;
 		
-		pieceGUI = new PieceGUI(piecesType, player.getIsPlayer1(), position);
+		pieceGUI = new PieceGUI(piecesType, player.getColour(), position);
 	}
 	
 	public PiecesType getType() {return pieceType;}
