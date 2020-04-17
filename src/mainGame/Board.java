@@ -15,13 +15,13 @@ import pieces.Queen;
 import pieces.Rook;
 
 public class Board {
-	int[][] gameBoard = new int[8][8];
 	Player player1;
 	Player player2;
 	
 	public Board()
 	{
 		GenerateBoard();
+		
 		player1 = new Player(PlayerColour.White);
 		player2 = new Player(PlayerColour.Black);
 		GeneratePieces(player1, player2); 
