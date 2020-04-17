@@ -64,8 +64,8 @@ public class ChessWindow extends JPanel {
 		else
 			button.setBackground(Color.GRAY);
 
-		// MyActionListener mal = new MyActionListener();
-		// button.addActionListener(mal);
+		 MyActionListener mal = new MyActionListener();
+		 button.addActionListener(mal);
 		add(button, gbc);
 	}
 }
