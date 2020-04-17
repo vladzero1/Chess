@@ -16,9 +16,4 @@ public class Player {
 		this.isPlayer1 = isPlayer1;
 		this.username =  username;
 	}
-	
-	public boolean getIsPlayer1()
-	{
-		return isPlayer1;
-	}
 }
