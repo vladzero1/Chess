@@ -17,4 +17,9 @@ public class King extends Piece{
 		
 	}
 
+	@Override
+	public Pair<Integer, Integer>[] getMovementIndex(Pair<Integer, Integer> position) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -4,11 +4,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import javafx.util.Pair;
+import mainGame.GameManager;
+import mainGame.Grid;
+import mainGame.PiecesType;
+import mainGame.PlayerColour;
+import pieces.Piece;
 
 public class ChessWindow extends JPanel {
 	/**
@@ -16,8 +22,8 @@ public class ChessWindow extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	public final int row = 8, column = 8;
-	public static JButton[][] gridList = new JButton[8][8];
-
+	public static Grid[][] gridList = new Grid[8][8];
+	public static Grid selectedGrid;
 	public ChessWindow() {
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -48,13 +54,58 @@ public class ChessWindow extends JPanel {
 		
 	}
 
+	public class MyActionListener implements ActionListener{
+		Pair<Integer, Integer> index;
+		boolean isShowMove = false;
+		Piece piece;
+		private MyActionListener(Pair<Integer, Integer> index) {
+			this.index = index;	
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Grid grid = gridList[index.getKey()][index.getValue()];
+			JButton button = gridList[index.getKey()][index.getValue()].getButton();
+			if(button.getName() == "Grid")
+			{
+				return;
+			}
+			String buttonName = button.getName();
+			if(GameManager.instance.turn%2 != 0)
+			{
+				if(buttonName.contains(PlayerColour.White.name()))
+				{
+					PiecesType type = grid.checkPieceType(buttonName);
+					grid.PiecesMove(type, button);
+//					System.out.println("White " + type.name());
+				}
+			}
+			else
+			{
+				if(buttonName.contains(PlayerColour.Black.name()))
+				{
+					System.out.println("Black");
+					PiecesType type = grid.checkPieceType(buttonName);
+					grid.PiecesMove(type, button);
+//					System.out.println(type.name());
+				}
+			}
+		}
+		
+
+		
+		
+		
+
+	}
 	// pair index
 	// Key = row
 	// Value = column
 	public void DrawGrid(Pair<Integer, Integer> index, GridBagConstraints gbc) {
 		JButton button = new JButton();
-		gridList[index.getKey()][index.getValue()] = button;
-
+		Grid grid = new Grid(button, index);
+		gridList[index.getKey()][index.getValue()] = grid;
+		button.setName("Grid");
 		button.setBorderPainted(true);
 		button.setPreferredSize(new Dimension(100, 100));
 
@@ -63,9 +114,11 @@ public class ChessWindow extends JPanel {
 			button.setBackground(Color.WHITE);
 		else
 			button.setBackground(Color.GRAY);
-
-		 MyActionListener mal = new MyActionListener();
+		
+		 MyActionListener mal = new MyActionListener(index);
 		 button.addActionListener(mal);
-		add(button, gbc);
+		 add(button, gbc);
 	}
+	
+
 }
