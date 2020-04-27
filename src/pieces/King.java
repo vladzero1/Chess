@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.List;
+
 import javafx.util.Pair;
 import mainGame.PiecesType;
 import mainGame.Player;
@@ -18,8 +20,14 @@ public class King extends Piece{
 	}
 
 	@Override
-	public Pair<Integer, Integer>[] getMovementIndex(Pair<Integer, Integer> position) {
+	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> position) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void AfterMove() {
+		// TODO Auto-generated method stub
+		
 	}
 }

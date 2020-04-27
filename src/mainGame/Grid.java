@@ -1,6 +1,7 @@
 package mainGame;
 
 import java.awt.Color;
+import java.util.List;
 
 import javax.swing.JButton;
 
@@ -10,8 +11,8 @@ import pieces.Piece;
 
 public class Grid {
 	JButton button;
-	Piece piece;
-	Pair<Integer, Integer> index;
+	private Piece piece;
+	private Pair<Integer, Integer> index;
 	boolean isShowMove = false;
 	public Grid(JButton button, Pair<Integer, Integer> index)
 	{
@@ -21,47 +22,64 @@ public class Grid {
 
 	public void PiecesMove(PiecesType piecesType, JButton button)
 	{
-		System.out.println(ChessWindow.selectedGrid);
-		System.out.println(isShowMove);
 		if(isShowMove)
 		{
+			RemoveShowMove();
 			ChessWindow.selectedGrid = null;
-			System.out.println("move removed");
+			isShowMove = false;
 		}
 		else
 		{
 			if(ChessWindow.selectedGrid != null)
 			{
-				System.out.println("move removed");
+				RemoveShowMove();
 			}
 			ChessWindow.selectedGrid =  ChessWindow.gridList[index.getKey()][index.getValue()];
 			ShowMove();
+			isShowMove = true;
 		}
-		isShowMove = !isShowMove;
+
 	}
 	
 	public void ShowMove()
 	{
-		Pair<Integer, Integer>[] indexList= piece.getMovementIndex(index);
-		for(Pair<Integer, Integer> tempIndex : indexList)
+		List<Pair<Integer, Integer>> indexList = piece.getMovementIndexList(index);
+		if(indexList.size() != 0)
 		{
-			int row = tempIndex.getKey();
-			int col = tempIndex.getValue();
-			ChessWindow.gridList[row][col].button.setBackground(Color.BLUE);
+			for(Pair<Integer, Integer> tempIndex : indexList)
+			{
+				Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
+				affectedGrid.button.setBackground(Color.BLUE);
+				affectedGrid.isShowMove = true;
+			}
 		}
 	}
 	
 	public void RemoveShowMove()
 	{
-		Pair<Integer, Integer>[] indexList= piece.getMovementIndex(index);
-		for(Pair<Integer, Integer> tempIndex : indexList)
+		Grid grid = ChessWindow.selectedGrid;
+		List<Pair<Integer, Integer>> indexList = grid.getPiece().getMovementIndexList(grid.getIndex());
+		if(indexList != null)
 		{
-			int sumPosition = tempIndex.getKey() + tempIndex.getValue();
-			if (sumPosition % 2 == 0)
-				button.setBackground(Color.WHITE);
-			else
-				button.setBackground(Color.GRAY);
+			for(Pair<Integer, Integer> tempIndex : indexList)
+			{
+				int sumPosition = tempIndex.getKey() + tempIndex.getValue();
+				Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
+				if (sumPosition % 2 == 0)
+					affectedGrid.getButton().setBackground(Color.WHITE);
+				else
+					affectedGrid.getButton().setBackground(Color.GRAY);
+				affectedGrid.isShowMove = false;
+			}
 		}
+		grid.isShowMove = false;
+	}
+	
+	public void ResetGrid()
+	{
+		button.setName("Grid");
+		button.setIcon(null);
+		piece = null;
 	}
 	
 	public PiecesType checkPieceType(String buttonName)
@@ -81,14 +99,34 @@ public class Grid {
 		
 		return null;
 	}
+
+	public boolean PieceIsExist()
+	{
+		return piece != null ? true : false;		
+	}
 	
 	public JButton getButton()
 	{
 		return button;
 	}
 	
-	public void setPieceType(Piece piece)
+	public void setPiece(Piece piece)
 	{
 		this.piece = piece;
+	}
+	
+	public Piece getPiece()
+	{
+		return piece == null ? null : piece;
+	}
+	
+	public Pair<Integer, Integer> getIndex()
+	{
+		return index;
+	}
+	
+	public boolean getIsShowMove()
+	{
+		return isShowMove;
 	}
 }

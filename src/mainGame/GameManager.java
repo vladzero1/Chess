@@ -14,5 +14,10 @@ public class GameManager {
 	public GameManager() {
 		instance = this;
 	}
+	
+	public void IncreaseTurn()
+	{
+		turn++;
+	}
 
 }

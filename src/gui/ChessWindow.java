@@ -14,14 +14,13 @@ import mainGame.GameManager;
 import mainGame.Grid;
 import mainGame.PiecesType;
 import mainGame.PlayerColour;
-import pieces.Piece;
 
 public class ChessWindow extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public final int row = 8, column = 8;
+	public static final int row = 8, column = 8;
 	public static Grid[][] gridList = new Grid[8][8];
 	public static Grid selectedGrid;
 	public ChessWindow() {
@@ -56,8 +55,6 @@ public class ChessWindow extends JPanel {
 
 	public class MyActionListener implements ActionListener{
 		Pair<Integer, Integer> index;
-		boolean isShowMove = false;
-		Piece piece;
 		private MyActionListener(Pair<Integer, Integer> index) {
 			this.index = index;	
 		}
@@ -65,29 +62,37 @@ public class ChessWindow extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Grid grid = gridList[index.getKey()][index.getValue()];
-			JButton button = gridList[index.getKey()][index.getValue()].getButton();
+			JButton button = grid.getButton();
 			if(button.getName() == "Grid")
 			{
-				return;
+				if(grid.getIsShowMove())
+				{
+					GameManager.instance.IncreaseTurn();
+					selectedGrid.RemoveShowMove();
+					selectedGrid.getPiece().UpdateButton(index);
+					selectedGrid.getPiece().AfterMove();
+					selectedGrid.ResetGrid();
+					selectedGrid = null;
+					return;
+				}
 			}
 			String buttonName = button.getName();
+
 			if(GameManager.instance.turn%2 != 0)
 			{
 				if(buttonName.contains(PlayerColour.White.name()))
 				{
+					System.out.println(grid.getPiece());
 					PiecesType type = grid.checkPieceType(buttonName);
 					grid.PiecesMove(type, button);
-//					System.out.println("White " + type.name());
 				}
 			}
 			else
 			{
 				if(buttonName.contains(PlayerColour.Black.name()))
 				{
-					System.out.println("Black");
 					PiecesType type = grid.checkPieceType(buttonName);
 					grid.PiecesMove(type, button);
-//					System.out.println(type.name());
 				}
 			}
 		}

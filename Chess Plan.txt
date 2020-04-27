@@ -13,6 +13,7 @@ Board :
 - Moving Piece
 - checkmate checking
 - boardGUI
+- reverse position
 
 GameManager:
 - turn loop
