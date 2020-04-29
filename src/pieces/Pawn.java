@@ -36,40 +36,69 @@ public class Pawn extends Piece{
 			{
 				list.add(targetGrid.getIndex());
 				
-				targetGrid = ChessWindow.gridList[position.getKey()-2][position.getValue()];
+				targetGrid = ChessWindow.gridList[index.getKey()-2][index.getValue()];
 				if(!targetGrid.PieceIsExist() && !isEverMove )
 				{
-					list.add(new Pair<Integer, Integer>(position.getKey()-2, position.getValue()));
+					list.add(new Pair<Integer, Integer>(index.getKey()-2, index.getValue()));
 				}
 			}
-			targetGrid = ChessWindow.gridList[position.getKey()-1][position.getValue()-1];
-			if(targetGrid.PieceIsExist())
+			if(index.getValue()-1 >= 0)
 			{
-				System.out.println("1");
-				if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.Black)
+				targetGrid = ChessWindow.gridList[index.getKey()-1][index.getValue()-1];
+				if(targetGrid.PieceIsExist())
 				{
-					System.out.println("tes");
-					list.add(targetGrid.getIndex());
+					if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.Black)
+					{
+						list.add(targetGrid.getIndex());
+					}
 				}
 			}
-			targetGrid = ChessWindow.gridList[position.getKey()-1][position.getValue()+1];
-			if(targetGrid.PieceIsExist())
+			if(index.getValue()+1 <= 7)
 			{
-				if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.Black)
+				targetGrid = ChessWindow.gridList[index.getKey()-1][index.getValue()+1];
+				if(targetGrid.PieceIsExist())
 				{
-					System.out.println("tes");
-					list.add(targetGrid.getIndex());
+					if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.Black)
+					{
+						list.add(targetGrid.getIndex());
+					}
 				}
 			}
 		}
-		else
+		else if(player.getPlayerColour() == PlayerColour.Black)
 		{
-			if(!ChessWindow.gridList[position.getKey()+1][position.getValue()].PieceIsExist())
+			Grid targetGrid = ChessWindow.gridList[index.getKey()+1][index.getValue()];
+			if(!targetGrid.PieceIsExist())
 			{
-				list.add(new Pair<Integer, Integer>(position.getKey()+1, position.getValue()));
-				if(!ChessWindow.gridList[position.getKey()+2][position.getValue()].PieceIsExist() && !isEverMove)
+				list.add(targetGrid.getIndex());
+				targetGrid = ChessWindow.gridList[index.getKey()+2][index.getValue()];
+				if(!targetGrid.PieceIsExist() && !isEverMove)
 				{
-					list.add(new Pair<Integer, Integer>(position.getKey()+2, position.getValue()));
+					list.add(targetGrid.getIndex());
+				}
+			}
+
+			
+			if(index.getValue()-1 >= 0)
+			{
+				targetGrid = ChessWindow.gridList[index.getKey()+1][index.getValue()-1];
+				if(targetGrid.PieceIsExist())
+				{
+					if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.White)
+					{
+						list.add(targetGrid.getIndex());
+					}
+				}
+			}
+			if(index.getValue()+1 <= 7)
+			{
+				targetGrid = ChessWindow.gridList[index.getKey()+1][index.getValue()+1];
+				if(targetGrid.PieceIsExist())
+				{
+					if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.White)
+					{
+						list.add(targetGrid.getIndex());
+					}
 				}
 			}
 		}

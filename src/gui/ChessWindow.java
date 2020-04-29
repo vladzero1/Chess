@@ -61,30 +61,30 @@ public class ChessWindow extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			System.out.println(" ");
 			Grid grid = gridList[index.getKey()][index.getValue()];
 			JButton button = grid.getButton();
-			if(button.getName() == "Grid")
-			{
-				if(grid.getIsShowMove())
-				{
-					GameManager.instance.IncreaseTurn();
-					selectedGrid.RemoveShowMove();
-					selectedGrid.getPiece().UpdateButton(index);
-					selectedGrid.getPiece().AfterMove();
-					selectedGrid.ResetGrid();
-					selectedGrid = null;
-					return;
-				}
-			}
 			String buttonName = button.getName();
 
 			if(GameManager.instance.turn%2 != 0)
 			{
 				if(buttonName.contains(PlayerColour.White.name()))
 				{
-					System.out.println(grid.getPiece());
 					PiecesType type = grid.checkPieceType(buttonName);
 					grid.PiecesMove(type, button);
+				}
+				else 
+				{
+					if(grid.getIsShowMove())
+					{
+						GameManager.instance.IncreaseTurn();
+						selectedGrid.RemoveShowMove();
+						selectedGrid.getPiece().UpdateButton(index);
+						selectedGrid.getPiece().AfterMove();
+						selectedGrid.ResetGrid();
+						selectedGrid = null;
+						return;
+					}
 				}
 			}
 			else
@@ -93,6 +93,19 @@ public class ChessWindow extends JPanel {
 				{
 					PiecesType type = grid.checkPieceType(buttonName);
 					grid.PiecesMove(type, button);
+				}
+				else
+				{
+					if(grid.getIsShowMove())
+					{
+						GameManager.instance.IncreaseTurn();
+						selectedGrid.RemoveShowMove();
+						selectedGrid.getPiece().UpdateButton(index);
+						selectedGrid.getPiece().AfterMove();
+						selectedGrid.ResetGrid();
+						selectedGrid = null;
+						return;
+					}
 				}
 			}
 		}
