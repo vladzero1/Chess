@@ -14,12 +14,6 @@ public class King extends Piece{
 	}
 
 	@Override
-	public void isValidMovement() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> position) {
 		// TODO Auto-generated method stub
 		return null;
