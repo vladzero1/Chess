@@ -43,13 +43,24 @@ public class Grid {
 	
 	public void ShowMove()
 	{
-		List<Pair<Integer, Integer>> indexList = piece.getMovementIndexList(index);
-		if(indexList.size() != 0)
+		List<Pair<Integer, Integer>> moveIndexList = piece.getMovementIndexList(index);
+		if(moveIndexList.size() != 0)
 		{
-			for(Pair<Integer, Integer> tempIndex : indexList)
+			for(Pair<Integer, Integer> tempIndex : moveIndexList)
 			{
 				Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
 				affectedGrid.button.setBackground(Color.BLUE);
+				affectedGrid.isShowMove = true;
+			}
+		}
+		
+		List<Pair<Integer, Integer>> attackIndexList = piece.getAttackIndexList(index);
+		if(attackIndexList.size() != 0)
+		{
+			for(Pair<Integer, Integer> tempIndex : attackIndexList)
+			{
+				Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
+				affectedGrid.button.setBackground(Color.RED);
 				affectedGrid.isShowMove = true;
 			}
 		}
@@ -58,10 +69,28 @@ public class Grid {
 	public void RemoveShowMove()
 	{
 		Grid grid = ChessWindow.selectedGrid;
-		List<Pair<Integer, Integer>> indexList = grid.getPiece().getMovementIndexList(grid.getIndex());
-		if(indexList != null)
+		List<Pair<Integer, Integer>> moveIndexList = grid.getPiece().getMovementIndexList(grid.getIndex());
+		
+		if(moveIndexList != null)
 		{
-			for(Pair<Integer, Integer> tempIndex : indexList)
+			for(Pair<Integer, Integer> tempIndex : moveIndexList)
+			{
+				int sumPosition = tempIndex.getKey() + tempIndex.getValue();
+				Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
+				if (sumPosition % 2 == 0)
+					affectedGrid.getButton().setBackground(Color.WHITE);
+				else
+					affectedGrid.getButton().setBackground(Color.GRAY);
+				affectedGrid.isShowMove = false;
+			}
+		}
+		
+		// don't forget to change
+		List<Pair<Integer, Integer>> attackIndexList = grid.getPiece().getAttackIndexList(grid.getIndex());
+		
+		if(attackIndexList != null)
+		{
+			for(Pair<Integer, Integer> tempIndex : attackIndexList)
 			{
 				int sumPosition = tempIndex.getKey() + tempIndex.getValue();
 				Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];

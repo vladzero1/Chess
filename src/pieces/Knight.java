@@ -25,4 +25,10 @@ public class Knight extends Piece {
 		
 	}
 
+	@Override
+	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

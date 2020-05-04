@@ -71,6 +71,8 @@ public abstract class Piece {
 	}
 	
 	public abstract List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index);
-
+	
+	public abstract List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index);
+	
 	public abstract void AfterMove();
 }

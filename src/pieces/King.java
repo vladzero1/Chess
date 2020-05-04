@@ -24,4 +24,10 @@ public class King extends Piece{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

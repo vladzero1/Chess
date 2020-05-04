@@ -15,16 +15,14 @@ public class Pawn extends Piece{
 	boolean isEverMove = false;
 	public Pawn(Pair<Integer, Integer> position, Player player) {
 		super(PiecesType.Pawn, position, player);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
 	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index) {
-		// TODO Auto-generated method stub
 		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
+		
 		if(player.getPlayerColour() == PlayerColour.White)
 		{
-			
 			Grid targetGrid = ChessWindow.gridList[index.getKey()-1][index.getValue()];
 			if(!targetGrid.PieceIsExist())
 			{
@@ -36,6 +34,30 @@ public class Pawn extends Piece{
 					list.add(new Pair<Integer, Integer>(index.getKey()-2, index.getValue()));
 				}
 			}
+		}
+		else if(player.getPlayerColour() == PlayerColour.Black)
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()+1][index.getValue()];
+			if(!targetGrid.PieceIsExist())
+			{
+				list.add(targetGrid.getIndex());
+				targetGrid = ChessWindow.gridList[index.getKey()+2][index.getValue()];
+				if(!targetGrid.PieceIsExist() && !isEverMove)
+				{
+					list.add(targetGrid.getIndex());
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
+		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
+		
+		if(player.getPlayerColour() == PlayerColour.White)
+		{
+			Grid targetGrid;
 			if(index.getValue()-1 >= 0)
 			{
 				targetGrid = ChessWindow.gridList[index.getKey()-1][index.getValue()-1];
@@ -61,18 +83,7 @@ public class Pawn extends Piece{
 		}
 		else if(player.getPlayerColour() == PlayerColour.Black)
 		{
-			Grid targetGrid = ChessWindow.gridList[index.getKey()+1][index.getValue()];
-			if(!targetGrid.PieceIsExist())
-			{
-				list.add(targetGrid.getIndex());
-				targetGrid = ChessWindow.gridList[index.getKey()+2][index.getValue()];
-				if(!targetGrid.PieceIsExist() && !isEverMove)
-				{
-					list.add(targetGrid.getIndex());
-				}
-			}
-
-			
+			Grid targetGrid;
 			if(index.getValue()-1 >= 0)
 			{
 				targetGrid = ChessWindow.gridList[index.getKey()+1][index.getValue()-1];
@@ -98,11 +109,10 @@ public class Pawn extends Piece{
 		}
 		return list;
 	}
-
+	
 	@Override
 	public void AfterMove() {
 		// TODO Auto-generated method stub
 		isEverMove = true;
 	}
-
 }
