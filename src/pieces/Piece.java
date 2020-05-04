@@ -70,7 +70,9 @@ public abstract class Piece {
 		button.setName(player.getPlayerColour().name() + " " + pieceType.name());
 	}
 	
-	public abstract List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index);
+	public abstract void isValidMovement();
+	
+	public abstract List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> position);
 
 	public abstract void AfterMove();
 }

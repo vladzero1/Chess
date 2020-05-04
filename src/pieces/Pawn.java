@@ -17,7 +17,13 @@ public class Pawn extends Piece{
 		super(PiecesType.Pawn, position, player);
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	@Override
+	public void isValidMovement() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index) {
 		// TODO Auto-generated method stub
