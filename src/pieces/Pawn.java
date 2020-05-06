@@ -63,7 +63,7 @@ public class Pawn extends Piece{
 				targetGrid = ChessWindow.gridList[index.getKey()-1][index.getValue()-1];
 				if(targetGrid.PieceIsExist())
 				{
-					if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.Black)
+					if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
 					{
 						list.add(targetGrid.getIndex());
 					}
@@ -74,7 +74,7 @@ public class Pawn extends Piece{
 				targetGrid = ChessWindow.gridList[index.getKey()-1][index.getValue()+1];
 				if(targetGrid.PieceIsExist())
 				{
-					if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.Black)
+					if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
 					{
 						list.add(targetGrid.getIndex());
 					}
@@ -89,7 +89,7 @@ public class Pawn extends Piece{
 				targetGrid = ChessWindow.gridList[index.getKey()+1][index.getValue()-1];
 				if(targetGrid.PieceIsExist())
 				{
-					if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.White)
+					if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
 					{
 						list.add(targetGrid.getIndex());
 					}
@@ -100,7 +100,7 @@ public class Pawn extends Piece{
 				targetGrid = ChessWindow.gridList[index.getKey()+1][index.getValue()+1];
 				if(targetGrid.PieceIsExist())
 				{
-					if(targetGrid.getPiece().player.getPlayerColour() == PlayerColour.White)
+					if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
 					{
 						list.add(targetGrid.getIndex());
 					}
