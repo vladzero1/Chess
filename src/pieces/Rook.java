@@ -13,7 +13,6 @@ public class Rook extends Piece{
 
 	public Rook(Pair<Integer, Integer> position, Player player) {
 		super(PiecesType.Rook, position, player);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -84,10 +83,9 @@ public class Rook extends Piece{
 			Grid targetGrid = ChessWindow.gridList[i][index.getValue()];
 			if(targetGrid.PieceIsExist())
 			{
-				Pair<Integer, Integer> gridIndex = GridWithPieceIndex(new Pair<Integer, Integer>(i, index.getValue()));
-				if(gridIndex != null)
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
 				{
-					list.add(gridIndex);
+					list.add(targetGrid.getIndex());
 					break;
 				}
 				break;
@@ -98,10 +96,9 @@ public class Rook extends Piece{
 			Grid targetGrid = ChessWindow.gridList[i][index.getValue()];
 			if(targetGrid.PieceIsExist())
 			{
-				Pair<Integer, Integer> gridIndex = GridWithPieceIndex(new Pair<Integer, Integer>(i, index.getValue()));
-				if(gridIndex != null)
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
 				{
-					list.add(gridIndex);
+					list.add(targetGrid.getIndex());
 					break;
 				}
 				break;
@@ -112,10 +109,9 @@ public class Rook extends Piece{
 			Grid targetGrid = ChessWindow.gridList[index.getKey()][i];
 			if(targetGrid.PieceIsExist())
 			{
-				Pair<Integer, Integer> gridIndex = GridWithPieceIndex(new Pair<Integer, Integer>(index.getKey(), i));
-				if(gridIndex != null)
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
 				{
-					list.add(gridIndex);
+					list.add(targetGrid.getIndex());
 					break;
 				}
 				break;
@@ -126,10 +122,9 @@ public class Rook extends Piece{
 			Grid targetGrid = ChessWindow.gridList[index.getKey()][i];
 			if(targetGrid.PieceIsExist())
 			{
-				Pair<Integer, Integer> gridIndex = GridWithPieceIndex(new Pair<Integer, Integer>(index.getKey(), i));
-				if(gridIndex != null)
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
 				{
-					list.add(gridIndex);
+					list.add(targetGrid.getIndex());
 					break;
 				}
 				break;
@@ -137,21 +132,6 @@ public class Rook extends Piece{
 		}
 	return list;
 	}
-	
-	public Pair<Integer, Integer> GridWithPieceIndex(Pair<Integer, Integer> index)
-	{
-		Grid targetGrid = ChessWindow.gridList[index.getKey()][index.getValue()];
-		
-		if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour()) //attack
-		{
-			return(targetGrid.getIndex());
-		}
-		else
-		{
-			return null;
-		}	
-	}
-	
 	
 	@Override
 	public void AfterMove() {

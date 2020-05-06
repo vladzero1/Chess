@@ -112,7 +112,6 @@ public class Pawn extends Piece{
 	
 	@Override
 	public void AfterMove() {
-		// TODO Auto-generated method stub
 		isEverMove = true;
 	}
 }

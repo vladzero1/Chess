@@ -1,8 +1,11 @@
 package pieces;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import gui.ChessWindow;
 import javafx.util.Pair;
+import mainGame.Grid;
 import mainGame.PiecesType;
 import mainGame.Player;
 
@@ -14,9 +17,120 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> position) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index) {
+		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
+		for (int i = index.getKey()-1; i >= 0; i--) //up
+		{
+			if(i >= 0)
+			{
+				Grid targetGrid = ChessWindow.gridList[i][index.getValue()];
+				if(!targetGrid.PieceIsExist())
+				{
+					list.add(targetGrid.getIndex());
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		for(int i = index.getKey()+1; i < 8;i++) //down
+		{
+			Grid targetGrid = ChessWindow.gridList[i][index.getValue()];
+			if(!targetGrid.PieceIsExist())
+			{
+				list.add(targetGrid.getIndex());
+			}
+			else
+			{
+				break;
+			}
+		}
+		for(int i = index.getValue()-1;i >= 0;i--) //left
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()][i];
+			if(!targetGrid.PieceIsExist())
+			{
+				list.add(targetGrid.getIndex());
+			}
+			else
+			{
+				break;
+			}
+		}
+		for(int i = index.getValue()+1; i < 8;i++) //down
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()][i];
+			if(!targetGrid.PieceIsExist())
+			{
+				list.add(targetGrid.getIndex());
+			}
+			else
+			{
+				break;
+			}
+		}
+		int loopAmount;
+		//1st quadrant
+		loopAmount = Math.min(index.getKey(), Math.abs(index.getValue()-7));
+		for(int i = 1;i<=loopAmount;i++)
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()-i][index.getValue()+i];
+			if(!targetGrid.PieceIsExist())
+			{
+				list.add(targetGrid.getIndex());
+			}
+			else
+			{
+				break;
+			}	
+		}
+		
+		//2nd quadrant
+		loopAmount = Math.min(index.getKey(), index.getValue());
+		for(int i = 1;i<=loopAmount;i++)
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()-i][index.getValue()-i];
+			if(!targetGrid.PieceIsExist())
+			{
+				list.add(targetGrid.getIndex());
+			}
+			else
+			{
+				break;
+			}
+		}
+		
+		//3rd quadrant
+		loopAmount = Math.min(Math.abs(index.getKey()-7), index.getValue());
+		for(int i = 1;i<=loopAmount;i++)
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()+i][index.getValue()-i];
+			if(!targetGrid.PieceIsExist())
+			{
+				list.add(targetGrid.getIndex());
+			}
+			else
+			{
+				break;
+			}
+		}
+		
+		//4th quadrant
+		loopAmount = Math.min(Math.abs(index.getKey()-7), Math.abs(index.getValue()-7));
+		for(int i = 1;i<=loopAmount;i++)
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()+i][index.getValue()+i];
+			if(!targetGrid.PieceIsExist())
+			{
+				list.add(targetGrid.getIndex());
+			}
+			else
+			{
+				break;
+			}
+		}
+		return list;
 	}
 
 	@Override
@@ -27,8 +141,122 @@ public class Queen extends Piece {
 
 	@Override
 	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
-		// TODO Auto-generated method stub
-		return null;
+List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
+		
+		for (int i = index.getKey()-1; i >= 0; i--) //up
+		{
+			Grid targetGrid = ChessWindow.gridList[i][index.getValue()];
+			if(targetGrid.PieceIsExist())
+			{
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
+				{
+					list.add(targetGrid.getIndex());
+					break;
+				}
+				break;
+			}
+		}
+		for(int i = index.getKey()+1; i < 8;i++) //down
+		{
+			Grid targetGrid = ChessWindow.gridList[i][index.getValue()];
+			if(targetGrid.PieceIsExist())
+			{
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
+				{
+					list.add(targetGrid.getIndex());
+					break;
+				}
+				break;
+			}
+		}
+		for(int i = index.getValue()-1;i >= 0;i--) //left
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()][i];
+			if(targetGrid.PieceIsExist())
+			{
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
+				{
+					list.add(targetGrid.getIndex());
+					break;
+				}
+				break;
+			}
+		}
+		for(int i = index.getValue()+1; i < 8;i++) //down
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()][i];
+			if(targetGrid.PieceIsExist())
+			{
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
+				{
+					list.add(targetGrid.getIndex());
+					break;
+				}
+				break;
+			}
+		}
+		
+		int loopAmount;
+		//1st quadrant
+		loopAmount = Math.min(index.getKey(), Math.abs(index.getValue()-7));
+		for(int i = 1;i<=loopAmount;i++)
+		{
+			Grid targetGrid =ChessWindow.gridList[index.getKey()-i][index.getValue()+i];
+			if(targetGrid.PieceIsExist())
+			{
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
+				{
+					list.add(targetGrid.getIndex());
+				}
+				break;
+			}				
+		}
+		
+		//2nd quadrant
+		loopAmount = Math.min(index.getKey(), index.getValue());
+		for(int i = 1;i<=loopAmount;i++)
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()-i][index.getValue()-i];
+			if(targetGrid.PieceIsExist())
+			{
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
+				{
+					list.add(targetGrid.getIndex());
+				}
+				break;
+			}
+		}
+		
+		//3rd quadrant
+		loopAmount = Math.min(Math.abs(index.getKey()-7), index.getValue());
+		for(int i = 1;i<=loopAmount;i++)
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()+i][index.getValue()-i];
+			if(targetGrid.PieceIsExist())
+			{
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
+				{
+					list.add(targetGrid.getIndex());
+				}
+				break;
+			}
+		}
+		
+		//4th quadrant
+		loopAmount = Math.min(Math.abs(index.getKey()-7), Math.abs(index.getValue()-7));
+		for(int i = 1;i<=loopAmount;i++)
+		{
+			Grid targetGrid = ChessWindow.gridList[index.getKey()+i][index.getValue()+i];
+			if(targetGrid.PieceIsExist())
+			{
+				if(targetGrid.getPiece().player.getPlayerColour() != player.getPlayerColour())
+				{
+					list.add(targetGrid.getIndex());
+				}
+				break;
+			}
+		}
+	return list;
 	}
 
 }

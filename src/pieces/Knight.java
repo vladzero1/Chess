@@ -10,7 +10,6 @@ public class Knight extends Piece {
 
 	public Knight(Pair<Integer, Integer> position, Player player) {
 		super(PiecesType.Knight, position, player);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -19,16 +18,19 @@ public class Knight extends Piece {
 		return null;
 	}
 
+	
+	@Override
+	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public void AfterMove() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

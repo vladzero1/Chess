@@ -13,12 +13,10 @@ public class Bishop extends Piece {
 
 	public Bishop(Pair<Integer, Integer> position, Player player) {
 		super(PiecesType.Bishop, position, player);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index) {
-		// TODO Auto-generated method stub
 		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer,Integer>>();
 		int loopAmount;
 		//1st quadrant
@@ -154,6 +152,7 @@ public class Bishop extends Piece {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
 
