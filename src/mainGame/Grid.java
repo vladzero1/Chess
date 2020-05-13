@@ -14,6 +14,7 @@ public class Grid {
 	private Piece piece;
 	private Pair<Integer, Integer> index;
 	boolean isShowMove = false;
+	boolean isShowAttack = false;
 	public Grid(JButton button, Pair<Integer, Integer> index)
 	{
 		this.button = button;
@@ -62,6 +63,7 @@ public class Grid {
 				Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
 				affectedGrid.button.setBackground(Color.RED);
 				affectedGrid.isShowMove = true;
+				affectedGrid.isShowAttack = true;
 			}
 		}
 	}
@@ -99,6 +101,7 @@ public class Grid {
 				else
 					affectedGrid.getButton().setBackground(Color.GRAY);
 				affectedGrid.isShowMove = false;
+				affectedGrid.isShowAttack = false;
 			}
 		}
 		grid.isShowMove = false;
@@ -157,5 +160,10 @@ public class Grid {
 	public boolean getIsShowMove()
 	{
 		return isShowMove;
+	}
+	
+	public boolean getIsShowAttack()
+	{
+		return isShowAttack;
 	}
 }

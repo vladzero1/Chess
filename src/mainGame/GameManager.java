@@ -20,4 +20,8 @@ public class GameManager {
 		turn++;
 	}
 
+	public void IsCheckmate()
+	{
+		
+	}
 }

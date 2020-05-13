@@ -35,17 +35,17 @@ public class Board {
 			{
 				Pair<Integer, Integer> position = new Pair<Integer, Integer>(row, col);
 				if (row == 0 && col == 0 || row == 0 && col == 7) 
-					{new Rook(position, player2);}
+					{ChessWindow.blackPieceList.add(new Rook(position, player2));}
 				else if (row == 0 && col == 1 || row == 0 && col == 6) 
-					{new Bishop(position, player2);}
+					{ChessWindow.blackPieceList.add(new Bishop(position, player2));}
 				else if (row == 0 && col == 2 || row == 0 && col == 5)
-					{new Knight(position, player2);}
+					{ChessWindow.blackPieceList.add(new Knight(position, player2));}
 				else if (row == 0 && col == 3)
-					{new Queen(position, player2);}
+					{ChessWindow.blackPieceList.add(new Queen(position, player2));}
 				else if (row == 0 && col == 4)
-					{new King(position, player2);}
+					{ChessWindow.blackPieceList.add(new King(position, player2));}
 				else if(row == 1)
-					{new Pawn(position, player2);}
+					{ChessWindow.blackPieceList.add(new Pawn(position, player2));}
 			}
 		}
 		for(int row = 6; row < 8;row++)
@@ -54,17 +54,17 @@ public class Board {
 			{
 				Pair<Integer, Integer> position = new Pair<Integer, Integer>(row, col);
 				if (row == 7 && col == 0 || row == 7 && col == 7) 
-					{new Rook(position, player1);}
+					{ChessWindow.whitePieceList.add(new Rook(position, player1));}
 				else if (row == 7 && col == 1 || row == 7 && col == 6) 
-					{new Bishop(position, player1);}
+					{ChessWindow.whitePieceList.add(new Bishop(position, player1));}
 				else if (row == 7 && col == 2 || row == 7 && col == 5)
-					{new Knight(position, player1);}
+					{ChessWindow.whitePieceList.add(new Knight(position, player1));}
 				else if (row == 7 && col == 3)
-					{new Queen(position, player1);}
+					{ChessWindow.whitePieceList.add(new Queen(position, player1));}
 				else if (row == 7 && col == 4)
-					{new King(position, player1);}
+					{ChessWindow.whitePieceList.add(new King(position, player1));}
 				else if(row == 6)
-					{new Pawn(position, player1);}
+					{ChessWindow.whitePieceList.add(new Pawn(position, player1));}
 			}
 		}
 		

@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,6 +16,7 @@ import mainGame.GameManager;
 import mainGame.Grid;
 import mainGame.PiecesType;
 import mainGame.PlayerColour;
+import pieces.Piece;
 
 public class ChessWindow extends JPanel {
 	/**
@@ -22,6 +25,8 @@ public class ChessWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public static final int row = 8, column = 8;
 	public static Grid[][] gridList = new Grid[8][8];
+	public static List<Piece> whitePieceList = new ArrayList<Piece>();
+	public static List<Piece> blackPieceList = new ArrayList<Piece>();
 	public static Grid selectedGrid;
 	public ChessWindow() {
 		setLayout(new GridBagLayout());
@@ -30,26 +35,12 @@ public class ChessWindow extends JPanel {
 			for (int j = 0; j < column; j++) {
 				gbc.gridx = j;
 				gbc.gridy = i;
-//				Border border = null;
-//
-//				if (i < 7) {
-//					if (j < 7) {
-//						border = new MatteBorder(1, 1, 0, 0, java.awt.Color.GRAY);
-//					} else {
-//						border = new MatteBorder(1, 1, 0, 1, java.awt.Color.GRAY);
-//					}
-//				} else {
-//					if (j < 7) {
-//						border = new MatteBorder(1, 1, 1, 0, java.awt.Color.GRAY);
-//					} else {
-//						border = new MatteBorder(1, 1, 1, 1, java.awt.Color.GRAY);
-//					}
-//				}
+
 				DrawGrid(new Pair<Integer, Integer>(i, j), gbc);
 
 			}
-
 		}
+		
 		
 	}
 
@@ -75,6 +66,10 @@ public class ChessWindow extends JPanel {
 				}
 				else 
 				{
+					if(grid.getIsShowAttack())
+					{
+						blackPieceList.remove(grid.getPiece());
+					}
 					if(grid.getIsShowMove())
 					{
 						GameManager.instance.IncreaseTurn();
@@ -96,6 +91,10 @@ public class ChessWindow extends JPanel {
 				}
 				else
 				{
+					if(grid.getIsShowAttack())
+					{
+						whitePieceList.remove(selectedGrid.getPiece());
+					}
 					if(grid.getIsShowMove())
 					{
 						GameManager.instance.IncreaseTurn();
@@ -109,12 +108,6 @@ public class ChessWindow extends JPanel {
 				}
 			}
 		}
-		
-
-		
-		
-		
-
 	}
 	// pair index
 	// Key = row
