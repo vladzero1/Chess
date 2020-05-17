@@ -17,7 +17,7 @@ public class King extends Piece{
 	}
 
 	@Override
-	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index) {
+	public List<Pair<Integer, Integer>> getMovementIndexList() {
 		List<Pair<Integer, Integer>> list =  new ArrayList<Pair<Integer,Integer>>();
 		Grid targetGrid;
 		if(index.getKey()+1 <=7)
@@ -79,7 +79,7 @@ public class King extends Piece{
 	}
 
 	@Override
-	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
+	public List<Pair<Integer, Integer>> getAttackIndexList() {
 		List<Pair<Integer, Integer>> list =  new ArrayList<Pair<Integer,Integer>>();
 		Grid targetGrid;
 		if(index.getKey()+1 <=7)

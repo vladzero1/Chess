@@ -16,7 +16,7 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index) {
+	public List<Pair<Integer, Integer>> getMovementIndexList() {
 		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer,Integer>>();
 		int loopAmount;
 		//1st quadrant
@@ -82,7 +82,7 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
+	public List<Pair<Integer, Integer>> getAttackIndexList() {
 		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer,Integer>>();
 		int loopAmount;
 		//1st quadrant

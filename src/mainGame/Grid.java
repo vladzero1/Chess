@@ -44,7 +44,7 @@ public class Grid {
 	
 	public void ShowMove()
 	{
-		List<Pair<Integer, Integer>> moveIndexList = piece.getMovementIndexList(index);
+		List<Pair<Integer, Integer>> moveIndexList = piece.getMovementIndexList();
 		if(moveIndexList.size() != 0)
 		{
 			for(Pair<Integer, Integer> tempIndex : moveIndexList)
@@ -55,7 +55,7 @@ public class Grid {
 			}
 		}
 		
-		List<Pair<Integer, Integer>> attackIndexList = piece.getAttackIndexList(index);
+		List<Pair<Integer, Integer>> attackIndexList = piece.getAttackIndexList();
 		if(attackIndexList.size() != 0)
 		{
 			for(Pair<Integer, Integer> tempIndex : attackIndexList)
@@ -71,7 +71,7 @@ public class Grid {
 	public void RemoveShowMove()
 	{
 		Grid grid = ChessWindow.selectedGrid;
-		List<Pair<Integer, Integer>> moveIndexList = grid.getPiece().getMovementIndexList(grid.getIndex());
+		List<Pair<Integer, Integer>> moveIndexList = grid.getPiece().getMovementIndexList();
 		
 		if(moveIndexList != null)
 		{
@@ -88,7 +88,7 @@ public class Grid {
 		}
 		
 		// don't forget to change
-		List<Pair<Integer, Integer>> attackIndexList = grid.getPiece().getAttackIndexList(grid.getIndex());
+		List<Pair<Integer, Integer>> attackIndexList = grid.getPiece().getAttackIndexList();
 		
 		if(attackIndexList != null)
 		{

@@ -16,7 +16,7 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index) {
+	public List<Pair<Integer, Integer>> getMovementIndexList() {
 		// TODO Auto-generated method stub
 		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
 		Grid targetGrid;
@@ -85,7 +85,7 @@ public class Knight extends Piece {
 
 	
 	@Override
-	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
+	public List<Pair<Integer, Integer>> getAttackIndexList() {
 		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
 		Grid targetGrid;
 		if(index.getKey()-2 >= 0)

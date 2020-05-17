@@ -17,12 +17,14 @@ import mainGame.PlayerColour;
 public abstract class Piece {
 	PiecesType pieceType;
 	Player player;
+	protected Pair<Integer, Integer> index;
 	Image img = null;
 	
 	public Piece(PiecesType piecesType, Pair<Integer, Integer> index, Player player)
 	{
 		this.pieceType = piecesType;
 		this.player = player;
+		this.index = index;
 		
 		UpdateButton(index);
 		ChessWindow.gridList[index.getKey()][index.getValue()].setPiece(this);
@@ -61,6 +63,7 @@ public abstract class Piece {
 	
 	public void UpdateButton(Pair<Integer, Integer> index)
 	{
+		this.index = index;
 		img = getPieceIcon();
 		
 		JButton button = ChessWindow.gridList[index.getKey()][index.getValue()].getButton();
@@ -70,9 +73,9 @@ public abstract class Piece {
 		button.setName(player.getPlayerColour().name() + " " + pieceType.name());
 	}
 	
-	public abstract List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index);
+	public abstract List<Pair<Integer, Integer>> getMovementIndexList();
 	
-	public abstract List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index);
+	public abstract List<Pair<Integer, Integer>> getAttackIndexList();
 	
 	public abstract void AfterMove();
 }

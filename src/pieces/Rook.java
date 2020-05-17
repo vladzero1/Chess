@@ -16,7 +16,7 @@ public class Rook extends Piece{
 	}
 
 	@Override
-	public List<Pair<Integer, Integer>> getMovementIndexList(Pair<Integer, Integer> index) {
+	public List<Pair<Integer, Integer>> getMovementIndexList() {
 		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
 		for (int i = index.getKey()-1; i >= 0; i--) //up
 		{
@@ -74,7 +74,7 @@ public class Rook extends Piece{
 	}
 
 	@Override
-	public List<Pair<Integer, Integer>> getAttackIndexList(Pair<Integer, Integer> index) {
+	public List<Pair<Integer, Integer>> getAttackIndexList() {
 		
 		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
 		

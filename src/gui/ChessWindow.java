@@ -16,6 +16,7 @@ import mainGame.GameManager;
 import mainGame.Grid;
 import mainGame.PiecesType;
 import mainGame.PlayerColour;
+import pieces.King;
 import pieces.Piece;
 
 public class ChessWindow extends JPanel {
@@ -28,6 +29,7 @@ public class ChessWindow extends JPanel {
 	public static List<Piece> whitePieceList = new ArrayList<Piece>();
 	public static List<Piece> blackPieceList = new ArrayList<Piece>();
 	public static Grid selectedGrid;
+	
 	public ChessWindow() {
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -56,7 +58,7 @@ public class ChessWindow extends JPanel {
 			Grid grid = gridList[index.getKey()][index.getValue()];
 			JButton button = grid.getButton();
 			String buttonName = button.getName();
-
+			
 			if(GameManager.instance.turn%2 != 0)
 			{
 				if(buttonName.contains(PlayerColour.White.name()))
@@ -72,12 +74,15 @@ public class ChessWindow extends JPanel {
 					}
 					if(grid.getIsShowMove())
 					{
+						System.out.println("boom white");
 						GameManager.instance.IncreaseTurn();
 						selectedGrid.RemoveShowMove();
 						selectedGrid.getPiece().UpdateButton(index);
 						selectedGrid.getPiece().AfterMove();
 						selectedGrid.ResetGrid();
 						selectedGrid = null;
+						GameManager.instance.setIsCheck(grid.getPiece());
+						GameManager.instance.IsCheckmate();
 						return;
 					}
 				}
@@ -97,12 +102,15 @@ public class ChessWindow extends JPanel {
 					}
 					if(grid.getIsShowMove())
 					{
+						System.out.println("boom black");
 						GameManager.instance.IncreaseTurn();
 						selectedGrid.RemoveShowMove();
 						selectedGrid.getPiece().UpdateButton(index);
 						selectedGrid.getPiece().AfterMove();
 						selectedGrid.ResetGrid();
 						selectedGrid = null;
+						GameManager.instance.setIsCheck(grid.getPiece());
+						GameManager.instance.IsCheckmate();
 						return;
 					}
 				}
@@ -131,5 +139,24 @@ public class ChessWindow extends JPanel {
 		 add(button, gbc);
 	}
 	
-
+	public static King getKing(PlayerColour whiteColour)
+	{
+		if(whiteColour == PlayerColour.White)
+		{
+			for (Piece piece : whitePieceList) {
+				if (piece instanceof King) {
+					return (King)piece;
+				}
+			}
+		}
+		else
+		{
+			for (Piece piece : blackPieceList) {
+				if (piece instanceof King) {
+					return (King)piece;
+				}
+			}
+		}
+		return null;
+	}
 }
