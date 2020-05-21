@@ -28,15 +28,24 @@ public class GameManager {
 		turn++;
 	}
 
-	public void setIsCheck(Piece piece)
+	public void setIsCheck()
 	{
-		List<Pair<Integer,Integer>> indexList = piece.getAttackIndexList();
-		for(Pair<Integer, Integer> index : indexList)
+		List<Piece> pieceList;
+		if(turn%2 == 1)
+			pieceList= ChessWindow.whitePieceList;
+		else
+			pieceList = ChessWindow.blackPieceList;
+		
+		for(Piece piece : pieceList)
 		{
-			if(ChessWindow.gridList[index.getKey()][index.getValue()].getPiece() instanceof King)
+			List<Pair<Integer,Integer>> indexList = piece.getAttackIndexList();
+			for(Pair<Integer, Integer> index : indexList)
 			{
-				isCheck= true;
-				return;
+				if(ChessWindow.gridList[index.getKey()][index.getValue()].getPiece() instanceof King)
+				{
+					isCheck = true;
+					ChessWindow.checkPieceList.add(piece);
+				}
 			}
 		}
 		isCheck = false;
@@ -44,46 +53,47 @@ public class GameManager {
 	
 	public void IsCheckmate()
 	{
+		King kingPiece;
+		List<Piece> pieceList;
 		if(turn%2 == 1)//white
 		{
-			System.out.println("check white");
-			King kingPiece = ChessWindow.getKing(PlayerColour.White);
-			List<Pair<Integer,Integer>> KingCurrentMove = kingPiece.getMovementIndexList(); 
-			for (Piece piece : ChessWindow.whitePieceList) {
-				List<Pair<Integer,Integer>> movementIndex = piece.getMovementIndexList();
-				for(Pair<Integer, Integer> index : movementIndex)
-				{
-					if(KingCurrentMove.contains(index))
-					{
-
-						KingCurrentMove.remove(index);
-					}
-				}
-			}
-			if(KingCurrentMove.size() == 0 && isCheck)//checkmate
-			{
-				System.out.println("Checkmate white");
-			}
+			kingPiece = ChessWindow.getKing(PlayerColour.White);
+			pieceList = ChessWindow.blackPieceList;
 		}
-		else //black
+		else
 		{
-			System.out.println("check black");
-			King kingPiece = ChessWindow.getKing(PlayerColour.Black);
-			List<Pair<Integer,Integer>> KingCurrentMove = kingPiece.getMovementIndexList(); 
-			for (Piece piece : ChessWindow.blackPieceList) {
-				List<Pair<Integer,Integer>> movementIndex = piece.getMovementIndexList();
-				for(Pair<Integer, Integer> index : movementIndex)
+			kingPiece = ChessWindow.getKing(PlayerColour.Black);
+			pieceList = ChessWindow.whitePieceList;
+		}
+	
+		List<Pair<Integer,Integer>> kingCurrentMove = kingPiece.getMovementIndexList(); 
+		for (Piece piece : pieceList) {
+			List<Pair<Integer,Integer>> movementIndex = piece.getMovementIndexList();
+			for(Pair<Integer, Integer> index : movementIndex)
+			{
+				if(kingCurrentMove.contains(index))
 				{
-					if(KingCurrentMove.contains(index))
+					kingCurrentMove.remove(index);
+				}
+			}
+		}
+		if(kingCurrentMove.size() == 0 && ChessWindow.checkPieceList.size()>1)
+		{
+			System.out.println("checkmate");
+		}
+		for (Piece checkPiece : ChessWindow.checkPieceList) {
+			List<Pair<Integer,Integer>> movementIndex = checkPiece.getCheckSolveIndexList();
+			for (Piece piece : pieceList) {
+				List<Pair<Integer,Integer>> movementIndex1= piece.getMovementIndexList();
+				for(Pair<Integer, Integer> index : movementIndex1)
+				{
+					if(movementIndex.contains(index))
 					{
-						KingCurrentMove.remove(index);
+						return;
 					}
 				}
 			}
-			if(KingCurrentMove.size() == 0 && isCheck)//checkmate
-			{
-				System.out.println("Checkmate black");
-			}
 		}
+		System.out.println(" checkmate");
 	}
 }

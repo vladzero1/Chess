@@ -114,4 +114,11 @@ public class Pawn extends Piece{
 	public void AfterMove() {
 		isEverMove = true;
 	}
+
+	@Override
+	public List<Pair<Integer, Integer>> getCheckSolveIndexList() {
+		List<Pair<Integer, Integer>> indexList = new ArrayList<Pair<Integer, Integer>>();
+		indexList.add(index);
+		return indexList;
+	}
 }

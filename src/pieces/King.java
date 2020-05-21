@@ -170,5 +170,11 @@ public class King extends Piece{
 		
 	}
 
+	@Override
+	public List<Pair<Integer, Integer>> getCheckSolveIndexList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

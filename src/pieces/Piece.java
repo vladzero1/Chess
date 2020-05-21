@@ -77,5 +77,7 @@ public abstract class Piece {
 	
 	public abstract List<Pair<Integer, Integer>> getAttackIndexList();
 	
+	public abstract List<Pair<Integer, Integer>> getCheckSolveIndexList();
+	
 	public abstract void AfterMove();
 }

@@ -44,6 +44,7 @@ public class Grid {
 	
 	public void ShowMove()
 	{
+		System.out.println(index);
 		List<Pair<Integer, Integer>> moveIndexList = piece.getMovementIndexList();
 		if(moveIndexList.size() != 0)
 		{

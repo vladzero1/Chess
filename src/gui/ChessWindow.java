@@ -28,6 +28,7 @@ public class ChessWindow extends JPanel {
 	public static Grid[][] gridList = new Grid[8][8];
 	public static List<Piece> whitePieceList = new ArrayList<Piece>();
 	public static List<Piece> blackPieceList = new ArrayList<Piece>();
+	public static List<Piece> checkPieceList = new ArrayList<Piece>();
 	public static Grid selectedGrid;
 	
 	public ChessWindow() {
@@ -74,15 +75,16 @@ public class ChessWindow extends JPanel {
 					}
 					if(grid.getIsShowMove())
 					{
-						System.out.println("boom white");
-						GameManager.instance.IncreaseTurn();
+						GameManager.instance.setIsCheck();
+
 						selectedGrid.RemoveShowMove();
 						selectedGrid.getPiece().UpdateButton(index);
 						selectedGrid.getPiece().AfterMove();
 						selectedGrid.ResetGrid();
 						selectedGrid = null;
-						GameManager.instance.setIsCheck(grid.getPiece());
+
 						GameManager.instance.IsCheckmate();
+						GameManager.instance.IncreaseTurn();
 						return;
 					}
 				}
@@ -103,14 +105,15 @@ public class ChessWindow extends JPanel {
 					if(grid.getIsShowMove())
 					{
 						System.out.println("boom black");
-						GameManager.instance.IncreaseTurn();
+						GameManager.instance.setIsCheck();
+
 						selectedGrid.RemoveShowMove();
 						selectedGrid.getPiece().UpdateButton(index);
 						selectedGrid.getPiece().AfterMove();
 						selectedGrid.ResetGrid();
 						selectedGrid = null;
-						GameManager.instance.setIsCheck(grid.getPiece());
 						GameManager.instance.IsCheckmate();
+						GameManager.instance.IncreaseTurn();
 						return;
 					}
 				}
