@@ -41,45 +41,61 @@ public class GameManager {
 			List<Pair<Integer,Integer>> indexList = piece.getAttackIndexList();
 			for(Pair<Integer, Integer> index : indexList)
 			{
-				if(ChessWindow.gridList[index.getKey()][index.getValue()].getPiece() instanceof King)
+				if(ChessWindow.gridList[index.getKey()][index.getValue()].getPiece().getType() == PiecesType.King)
 				{
 					isCheck = true;
 					ChessWindow.checkPieceList.add(piece);
 				}
 			}
 		}
+		if(isCheck)
+		{
+			System.out.println("isCheck = " + isCheck);
+			return;
+		}
 		isCheck = false;
+		System.out.println("isCheck = " + isCheck);
 	}
 	
 	public void IsCheckmate()
 	{
 		King kingPiece;
 		List<Piece> pieceList;
+		
 		if(turn%2 == 1)//white
-		{
-			kingPiece = ChessWindow.getKing(PlayerColour.White);
-			pieceList = ChessWindow.blackPieceList;
-		}
-		else
 		{
 			kingPiece = ChessWindow.getKing(PlayerColour.Black);
 			pieceList = ChessWindow.whitePieceList;
 		}
-	
+		else
+		{
+			kingPiece = ChessWindow.getKing(PlayerColour.White);
+			pieceList = ChessWindow.blackPieceList;
+		}
+
 		List<Pair<Integer,Integer>> kingCurrentMove = kingPiece.getMovementIndexList(); 
 		for (Piece piece : pieceList) {
-			List<Pair<Integer,Integer>> movementIndex = piece.getMovementIndexList();
-			for(Pair<Integer, Integer> index : movementIndex)
+			if(piece.getType() != PiecesType.King)
 			{
-				if(kingCurrentMove.contains(index))
+				List<Pair<Integer,Integer>> movementIndex = piece.getMovementIndexList();
+				for(Pair<Integer, Integer> index : movementIndex)
 				{
-					kingCurrentMove.remove(index);
+					if(kingCurrentMove.contains(index))
+					{
+						kingCurrentMove.remove(index);
+					}
 				}
 			}
 		}
 		if(kingCurrentMove.size() == 0 && ChessWindow.checkPieceList.size()>1)
 		{
-			System.out.println("checkmate");
+			System.out.println("checkmate 1");
+			return;
+		}
+		else if(kingCurrentMove.size()!=0)
+		{
+			System.out.println("not checkmate");
+			return;
 		}
 		for (Piece checkPiece : ChessWindow.checkPieceList) {
 			List<Pair<Integer,Integer>> movementIndex = checkPiece.getCheckSolveIndexList();
@@ -89,11 +105,11 @@ public class GameManager {
 				{
 					if(movementIndex.contains(index))
 					{
+						System.out.println("not checkmate");
 						return;
 					}
 				}
 			}
 		}
-		System.out.println(" checkmate");
 	}
 }

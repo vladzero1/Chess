@@ -119,6 +119,14 @@ public class Pawn extends Piece{
 	public List<Pair<Integer, Integer>> getCheckSolveIndexList() {
 		List<Pair<Integer, Integer>> indexList = new ArrayList<Pair<Integer, Integer>>();
 		indexList.add(index);
+		
+		for(Pair<Integer, Integer> index : getAttackIndexList())
+		{
+			if(ChessWindow.gridList[index.getKey()][index.getValue()].getPiece() instanceof King)
+			{
+				indexList.add(index);
+			}
+		}
 		return indexList;
 	}
 }

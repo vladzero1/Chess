@@ -259,5 +259,11 @@ List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
 		
 	}
 
+	@Override
+	public List<Pair<Integer, Integer>> getCheckSolveIndexList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

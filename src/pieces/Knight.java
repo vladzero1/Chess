@@ -181,6 +181,20 @@ public class Knight extends Piece {
 		
 	}
 
+	@Override
+	public List<Pair<Integer, Integer>> getCheckSolveIndexList() {
+		List<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
+		list.add(this.index);
+		for(Pair<Integer, Integer> index : getAttackIndexList())
+		{
+			if(ChessWindow.gridList[index.getKey()][index.getValue()].getPiece() instanceof King)
+			{
+				list.add(index);
+			}
+		}
+		return list;
+	}
+
 
 
 }
