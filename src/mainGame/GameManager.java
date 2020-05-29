@@ -89,27 +89,32 @@ public class GameManager {
 		}
 		if(kingCurrentMove.size() == 0 && ChessWindow.checkPieceList.size()>1)
 		{
-			System.out.println("checkmate 1");
+			System.out.println("checkmate 1"); //checkmate by more than 1 piece and king cannot move
 			return;
 		}
-		else if(kingCurrentMove.size()!=0)
+		else if(kingCurrentMove.size() != 0)
 		{
-			System.out.println("not checkmate");
+			System.out.println("not checkmate 1"); //king can move
 			return;
 		}
 		for (Piece checkPiece : ChessWindow.checkPieceList) {
 			List<Pair<Integer,Integer>> movementIndex = checkPiece.getCheckSolveIndexList();
-			for (Piece piece : pieceList) {
-				List<Pair<Integer,Integer>> movementIndex1= piece.getMovementIndexList();
-				for(Pair<Integer, Integer> index : movementIndex1)
+			for (Piece piece : pieceList) 
+			{
+				if(piece.getType() != PiecesType.King)
 				{
-					if(movementIndex.contains(index))
+					List<Pair<Integer,Integer>> movementIndex1= piece.getMovementIndexList();
+					for(Pair<Integer, Integer> index : movementIndex1)
 					{
-						System.out.println("not checkmate");
-						return;
+						if(movementIndex.contains(index))
+						{
+							System.out.println("not checkmate 2"); //another piece can block the enemy move
+							return;
+						}
 					}
 				}
 			}
 		}
+		System.out.println("Checkmate"); //king cannot move and nobody can attack the piece
 	}
 }
