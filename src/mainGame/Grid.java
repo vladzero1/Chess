@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import gui.ChessWindow;
 import javafx.util.Pair;
+import pieces.King;
 import pieces.Piece;
 
 public class Grid {
@@ -50,9 +51,56 @@ public class Grid {
 		{
 			for(Pair<Integer, Integer> tempIndex : moveIndexList)
 			{
-				Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
-				affectedGrid.button.setBackground(Color.BLUE);
-				affectedGrid.isShowMove = true;
+				if(GameManager.instance.isCheck)
+				{
+					for (Piece checkPiece : ChessWindow.checkPieceList) 
+					{
+						boolean isEqual = false;
+						List<Pair<Integer,Integer>> movementIndex = checkPiece.getCheckSolveIndexList();
+						boolean allIsNotEqual = true;
+						for(Pair<Integer,Integer> index1 : movementIndex)
+						{
+							if(ChessWindow.gridList[index.getKey()][index.getValue()].getPiece().getType() == PiecesType.King)//for king piece only
+							{
+								if(index1.equals(tempIndex))
+								{
+									isEqual= true;
+									allIsNotEqual= false;
+									break;
+								}
+							}
+							else if(index1.equals(tempIndex) )
+							{
+								isEqual= true;
+								Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
+								affectedGrid.button.setBackground(Color.BLUE);
+								affectedGrid.isShowMove = true;
+								break;
+							}
+						}
+						if(ChessWindow.gridList[index.getKey()][index.getValue()].getPiece().getType() == PiecesType.King)//for king piece only
+						{
+							if(allIsNotEqual)
+							{
+								Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
+								affectedGrid.button.setBackground(Color.BLUE);
+								affectedGrid.isShowMove = true;
+							}
+						}
+						
+						if(isEqual)
+						{
+							break;
+						}
+
+					}
+				}
+				else
+				{
+					Grid affectedGrid = ChessWindow.gridList[tempIndex.getKey()][tempIndex.getValue()];
+					affectedGrid.button.setBackground(Color.BLUE);
+					affectedGrid.isShowMove = true;
+				}
 			}
 		}
 		
